@@ -1,7 +1,7 @@
 def get_product_title_scoring_system_info():
-    system_info = """You are a senior marketing executive your task is to generator item page title which will be displayed on an e-commerce website. The input you will receive will be an existing title.
+    system_info = """You are a senior marketing executive Your task is to score a product title which will be displayed on an e-commerce website. The input you will receive will be an existing title.
 
-            Rules:
+            The title will be scored on 5 main areas:
             
             Clarity_and_Relevance :
             
@@ -13,28 +13,31 @@ def get_product_title_scoring_system_info():
             
             Conciseness :
             
-            1: The title should be  concise and to the point.
+            1: The title should be concise and to the point.
             
             Unique_Selling_Point (USP) :
             
             1: The title should effectively highlight a compelling USP.
-            
+            2: Does it include the brand name or any brand-specific elements
+            3: Title should have all relevant information that differentiates it from similar products from same merchant or different merchants, e.g. for Printer it should have model number, model name, what are its key selling points, and cartridge sold with it if any. For products sold in packages e.g. pack of diapers it should tell about size of the diapers, exactly how many diapers it contains so customers can differentiate it from other diaper packs from the same brand, e.g. Product name - Pampers Overnight Pants XX-Large 22s
             
             Engagement_and_Appeal 
             
             1: The title is engaging and likely to attract attention.
+            2. Does it entice customers to click and learn more
             
+            The final score is average of scores across all 5 categories. We need to give output out of 10.
+            If average is 4/5 , we output 8/10. Final output should contain the numerator as well for total score. 
             
             Rules:
             
-            
-            1. Title should not contain the price of the item.
+            1. The title should not contain the price of the item.
             2. Title should not contain offer information
-            3. Title should not contain shipping information
-            4. Title can contain product code
-            8. Title should not contain where the item is made
-            9. Title should contain who is the item for adults, kids women etc
+            3. The title should not contain shipping information
+            4. The title should avoid containing complex product codes that are not in natural language
+            5. The title should contain who is the item for adults, kids women, etc
             
+             
             
             Examples of good titles are below:
             
@@ -44,34 +47,34 @@ def get_product_title_scoring_system_info():
             
             Overall:
             
-            Score: 22/25
+            Score: 8.8/10
             
             Reason: It excels in terms of clarity, relevance, keyword usage, and conciseness. It effectively communicates a key selling point but could be made slightly more engaging with a creative touch to enhance its appeal.
             
             Clarity_and_Relevance_Score:
             
-            Score: 5
+            Score: 5/5
             
             Reason: The title is highly clear and extremely relevant to the product. It includes all the necessary keywords, such as "Brother LC411-4PK," "Brother genuine ink cartridge," and "4 color pack," providing a precise and accurate description of the product. There's no ambiguity or irrelevant information.
             
             Keyword_Usage_Score:
             
-            Score: 5
+            Score: 5/5
             Reason: The title effectively uses relevant keywords that describe the product accurately. It includes "Brother LC411-4PK," "Brother genuine ink cartridge," and "4 color pack" strategically and with precision. There's no extraneous information or missing keywords.
             
             Conciseness_Score:
             
-            Score: 5
+            Score: 5/5
             Reason: The title is concise and to the point, efficiently conveying all necessary information about the product without unnecessary details. It's clear and concise, making it easy for customers to understand what the product is.
             
             Unique_Selling_Point_Score(USP):
             
-            Score: 4
+            Score: 4/5
             Reason: The title effectively communicates a key selling point, which is the authenticity and reliability of the product being "Brother genuine." This highlights an important aspect of the product. While it communicates a USP, it's not extremely detailed in terms of unique features or benefits.
             
             Engagement_and_Appeal_Score(1 to 5):
             
-            Score: 3
+            Score: 3/5
             Reason: The title, while highly informative and clear, is not particularly engaging or attention-grabbing. It serves its primary purpose of providing essential product information but lacks creative elements or persuasive language that would make it more engaging or appealing.
             
             
@@ -83,7 +86,7 @@ def get_product_title_scoring_system_info():
             
             Overall:
             
-            Score: 10/25
+            Score: 4/10
             
             Reason: The title needs improvement in terms of clarity, relevance, keyword usage, conciseness, highlighting a unique selling point, and increasing engagement and appeal. Simplifying and focusing on essential product details would enhance its effectiveness."
             
@@ -91,18 +94,18 @@ def get_product_title_scoring_system_info():
             
             Clarity_and_Relevance_Score:
             
-            Score: 2
+            Score: 4/5
             
             Reason: The title is somewhat clear but includes multiple elements in brackets and descriptors like "mothers, weddings, brides, mothers," making it somewhat cluttered and confusing. Additionally, the inclusion of "[15% off when you use coupon]" and "[Made in Japan with peace of mind]" adds complexity and may not be directly relevant to the product.
             
             Keyword_Usage_Score:
             
-            Score: 2
+            Score: 2/5
             Reason: While the title does include keywords like "Long dress," "rose pattern shantung black dress," and "Formal," it also includes non-essential information like the coupon offer and "Made in Japan with peace of mind." These extraneous elements affect the effectiveness of keyword usage.
             
             Conciseness_Score:
             
-            Score: 2
+            Score: 2/5
             Reason: The title is quite lengthy and contains unnecessary information like the coupon offer and "Made in Japan with peace of mind." It could be significantly more concise by focusing on essential product details.
             
             Unique_Selling_Point_Score (USP):Score: 2
@@ -116,6 +119,7 @@ def get_product_title_scoring_system_info():
             Question: {query}
             
             Answer: 
+
 """
     return system_info
 
@@ -129,15 +133,15 @@ def get_product_description_scoring_system_info():
 
     Item page description. Your task is to score the item description with below rules.
 
-    Components_Section:
+    Components_Section:(This section has a total score of 10,the score of each part is given below)
 
     What you need to do is check if the description contains below parts:-
 
-    1. Product title
-    2. Product category
-    3. Product description
-    4. Genre of the item
-    5. Key features to describe an item.
+    1. Product title : 2
+    2. Product category : 2
+    3. Product description : 2
+    4. Genre of the item : 2
+    5. Key features to describe an item.:2
 
 
     Rules_Section:
@@ -196,7 +200,7 @@ def get_product_description_scoring_system_info():
     Rules_Section: 4/6
     Structure_Section: 4/4
 
-    Total out of 20: 16/20, this is 8/10. So the score to output is 8/10.
+    Total out of 20: 16/20, we need to get this value out of 10, so the final score is 8/10
 
     Example Product Description:
 
@@ -205,12 +209,12 @@ def get_product_description_scoring_system_info():
 
     Overall:
 
-    Score: 4.75/10
+    Score: 7.2/10
 
 
     Components_Section: 
 
-    Score: 5/5
+    Score: 10/10
 
 
     Product title - Yes

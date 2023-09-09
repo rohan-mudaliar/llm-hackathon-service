@@ -3,13 +3,12 @@ import json
 def get_product_title_scoring_prompt(title):
     prompt_prefix = f"""
     --------------------------
-    Score the given {title}. Give me output in below format:
-
-    Section_Title((Overall,Clarity_and_Relevance,Keyword_Usage,Conciseness, Unique_Selling_Point or Engagement_and_Appeal)), Score, Reason
-
-    Give the score and how much it is out of for each section.Eg. Score - 16/25
-
-    Strictly output in JSON format. The JSON should have the following format:"""
+        Score the given {title}. Give me output in below format:
+        
+        Section_Title((Overall,Clarity_and_Relevance,Keyword_Usage,Conciseness, Unique_Selling_Point or Engagement_and_Appeal)), Score, Reason
+        
+        Strictly output in JSON format. The JSON should have the following format:
+        """
 
     # typescript interface
     sample_interface = """interface Response {
